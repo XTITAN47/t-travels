@@ -1,14 +1,12 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import os
-
 #------------------------------------------------------------------------------------------------------------------------
 root = Tk()
 #function
-def next_page():
-    root.destroy()
+
     
-    os.system(r"C:\Users\vimar\Desktop\t-travels\page2.py")
+
 
 # ADDING CANVAS 
 
@@ -23,7 +21,7 @@ root.title("TITAN TRAVELS")
 
 
 
-img = Image.open("image.jpg").resize((1280,720),)
+img = Image.open(r"C:\Users\vimar\Desktop\t-travels\material\image.jpg").resize((1280,720),)
 photo = ImageTk.PhotoImage(img)
 Label(root,image=photo,borderwidth='2',bg='black').place(x=0,y=0)
 root.resizable(width=False, height=False)   
@@ -67,7 +65,7 @@ adressentry.grid(row=5, column=3)
 #CHECKBOX
 
 #submit button
-Button(text="Submit", command=next_page).grid(row=8,column=3,pady=16)
+Button(text="Submit").grid(row=8,column=3,pady=16)
 
 
 root.mainloop()
