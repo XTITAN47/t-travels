@@ -1,0 +1,19 @@
+[user,contact,email,psw]
+CREATE TABLE users (
+    user varchar(10),
+    contact varchar(11),
+    email varchar(255),
+    psw varchar(255),
+    primary key(user)
+);
+INSERT INTO users (user, contact, email, psw)
+VALUES ({}, {}, {},{});
+
+admin:
+sql = "INSERT INTO users (user, contact,email,psw) VALUES (%s, %s,%s,%s)"
+val = ("titan","123","titan@titan.com",'admin')
+mycursor.execute(sql, val)
+
+mydb.commit()
+
+[flight booking,train tickets,bus tickets, hotel booking, complete packages]
