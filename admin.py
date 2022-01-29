@@ -1,130 +1,89 @@
+from distutils import command
 from tkinter import *
 from tkinter.font import Font
 from tkinter import ttk
+from turtle import left
+import tkinter as tk
 import mysql.connector
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="Titan@1067",
-  database = 'titan_travels'
-)
+mydb = mysql.connector.connect(host="localhost",user="root",password="titan@1067",database="titan_travels")
 cu = mydb.cursor()
 
 def Home():
     def logout():
         home.destroy()
         pass
-    def showusers():
-        treev["columns"] = ("1", "2", "3",'4')
-        treev['show'] = 'headings'
-        treev.column("1", width = 100)
-        treev.column("2", width = 100)
-        treev.column("3", width = 100)
-        treev.column('4',width=100)
-        treev.heading("1", text ="UserID")
-        treev.heading("2", text ="Contact")
-        treev.heading("3", text ="Email")
-        treev.heading("4", text ="Admin Status")
-        cu.execute('select * from users;')
-        data = cu.fetchall()
-        c = 0
-        for i in data:
-            c +=1
-            treev.insert("", 'end', text ="L{c}", values =(i[0], i[1], i[2], i[4]))
+    
+    udta=["S.No","UserID","Contact","Email","Admin Status"]
+    uwd=[70,200,200,200,200]
+    fldta=["Flightid","Flightname","Departure","Destination"]
+    fwd=[100,200,200,200]
+    busdta=["BusId","Departure","Destination"]
+    buswd=[100,200,200]
+    trdta=["TrainId","Trainname","Departure","Destination"]
+    trwd=[100,200,200,200]
+    htldta=["hotelid","hotelname","address","rooms_available"]
+    htlwd=[100,200,200,200]
+    rvdta=["ReviewId","UserId","Username","Review"]
+    rvwd=[100,200,200,200]
+    
+    def treetbl(x,y,z):
+        s=ttk.Style() ; s.theme_use("clam")
+        tbfr=Frame(frame24,border=0)
+        tbfr.place(x=0,y=0,width=800,height=300)
 
+        tbl=ttk.Treeview(tbfr,show="headings",columns=tuple(y))
+        for i in range(len(y)):
+            tbl.column(y[i],width=z[i],minwidth=10,anchor=tk.CENTER)
+            tbl.heading(y[i],text=y[i],anchor=tk.CENTER)
+        mydb=mysql.connector.connect(host="localhost",user="root",passwd="titan@1067",database="titan_travels")
+        c=mydb.cursor()
+        c.execute("select * from "+x)
+        if x=="users":
+            count=1
+            for i in c:
+                tbl.insert('',count,text='',values=(count,i[0],i[1],i[2],i[4]))
+                count=count+1
 
-    def showflights():
-        treev["columns"] = ("1", "2", "3",'4')
-        treev['show'] = 'headings'
-        treev.column("1", width = 100)
-        treev.column("2", width = 100)
-        treev.column("3", width = 100)
-        treev.column('4',width=100)
-        treev.heading("1", text ="AirplaneNo")
-        treev.heading("2", text ="AirplaneName")
-        treev.heading("3", text ="Departure")
-        treev.heading("4", text ="Destination")
-        cu.execute('select * from aeroplanes;')
-        data = cu.fetchall()
-        c = 0
-        for i in data:
-            c +=1
-            treev.insert("", 'end', text ="L{c}", values =(i[0], i[1], i[2], i[3]))
+        elif x=="aeroplanes" or x=="trains" or x=="hotels" or x=="reviews":
+            count=1
+            for i in c:
+                tbl.insert('',count,text='',values=(count,i[1],i[2],i[3]))
+                count=count+1
 
-    def showbuses():
-        treev["columns"] = ("1", "2", "3")
-        treev['show'] = 'headings'
-        treev.column("1", width = 100)
-        treev.column("2", width = 150)
-        treev.column("3", width = 150)
-        treev.heading("1", text ="BusID")
-        treev.heading("2", text ="Departure")
-        treev.heading("3", text ="Destination")
-        cu.execute('select * from buses;')
-        data = cu.fetchall()
-        c = 0
-        for i in data:
-            c +=1
-            treev.insert("", 'end', text ="L{c}", values =(i[0], i[1], i[2], i[3]))
+        elif x=="buses":
+            count=1
+            for i in c:
+                tbl.insert('',count,text='',values=(count,i[1],i[2]))
+                count=count+1
 
-    def showtrains():
-        treev["columns"] = ("1", "2", "3",'4')
-        treev['show'] = 'headings'
-        treev.column("1", width = 100)
-        treev.column("2", width = 100)
-        treev.column("3", width = 100)
-        treev.column('4',width=100)
-        treev.heading("1", text ="TrainID")
-        treev.heading("2", text ="TrainName")
-        treev.heading("3", text ="Departure")
-        treev.heading("4", text ="Destination")
-        cu.execute('select * from trains;')
-        data = cu.fetchall()
-        c = 0
-        for i in data:
-            c +=1
-            treev.insert("", 'end', text ="L{c}", values =(i[0], i[1], i[2], i[3]))
+        hsb=Scrollbar(tbfr,orient=HORIZONTAL)
+        vsb=Scrollbar(tbfr,orient=VERTICAL)
 
-    def showhotels():
-        treev["columns"] = ("1", "2", "3",'4')
-        treev['show'] = 'headings'
-        treev.column("1", width = 100)
-        treev.column("2", width = 100)
-        treev.column("3", width = 100)
-        treev.column('4',width=100)
-        treev.heading("1", text ="HotelID")
-        treev.heading("2", text ="HotelName")
-        treev.heading("3", text ="Address")
-        treev.heading("4", text ="Rooms")
-        cu.execute('select * from hotels;')
-        data = cu.fetchall()
-        c = 0
-        for i in data:
-            c +=1
-            treev.insert("", 'end', text ="L{c}", values =(i[0], i[1], i[2], i[3]))
+        tbl.config(xscrollcommand=hsb.set)
+        tbl.config(yscrollcommand=vsb.set)
 
-    def showreviews():
-        treev["columns"] = ("1", "2", "3",'4')
-        treev['show'] = 'headings'
-        treev.column("1", width = 100)
-        treev.column("2", width = 100)
-        treev.column("3", width = 100)
-        treev.column('4',width=100)
-        treev.heading("1", text ="ReviewID")
-        treev.heading("2", text ="UserID")
-        treev.heading("3", text ="Name")
-        treev.heading("4", text ="Review")
-        cu.execute('select * from reviews;')
-        data = cu.fetchall()
-        c = 0
-        for i in data:
-            c +=1
-            treev.insert("", 'end', text ="L{c}", values =(i[0], i[1], i[2], i[3]))
+        hsb.pack(fill=X,side=BOTTOM)
+        hsb.config(command=tbl.xview)
+        vsb.pack(fill=Y,side=RIGHT)
+        vsb.config(command=tbl.yview)
+        tbl.pack(fill=BOTH,expand=1)
 
-
+    def usrs():
+        treetbl("users",udta,uwd)
+    def flt():
+        treetbl("aeroplanes",fldta,fwd)
+    def bus():
+        treetbl("buses",busdta,buswd)
+    def train():
+        treetbl("trains",trdta,trwd)
+    def hotel():
+        treetbl("hotels",htldta,htlwd)
+    def rev():
+        treetbl("reviews",rvdta,rvwd)
+    
     print('admin')
     home=Tk()
-    home.geometry("1280x720")
+    home.geometry("1280x720+100+50")
     home.resizable(0,0)
     home.title("Admin Panel")
 
@@ -136,83 +95,54 @@ def Home():
             size=25,
             weight="bold")
 
-    frame1=Frame(home,width=1270,height=710,bg='black',highlightbackground="black",highlightthickness=5)
-    frame1.place(x=0,y=0)
-    frame2=Frame(frame1,width=1270,height=80,highlightbackground="black",bg="#4b2aa1",highlightthickness=1)
-    frame2.grid(row=0,column=0)
-    l3=Label(frame2,text="Admin Panel",font=bigfont,bg="#4b2aa1",fg="white")
-    l3.place(x=520,y=10)
+    frame21=Frame(home,width=800,height=100,highlightbackground="black",bg="#4b2aa1",highlightthickness=5)
+    frame21.place(x=250,y=0)
+    frame22=Frame(home,width=1272,height=605,highlightbackground="black",highlightthickness=1)
+    frame22.place(x=4,y=110)
+    frame23=Frame(frame22,width=1268,height=79,highlightbackground="black",highlightthickness=1)
+    frame23.place(x=0,y=0)
+    frame24=Frame(frame22,width=1272,height=520,highlightbackground="black",highlightthickness=1)
+    frame24.place(x=-1,y=80)
 
-    frame3=Frame(frame1,width=1270,height=630,highlightbackground="black",bg='black',highlightthickness=1)
-    frame3.grid(row=1,column=0)
-
-    frame4=Frame(frame3,width=800,height=630,bg='green',highlightbackground="black",highlightthickness=1)
-    frame4.grid(row=0,column=0)
-
-    frame5=Frame(frame3,width=470,height=630,bg='blue',highlightbackground="black",highlightthickness=1)
-    frame5.grid(row=0,column=1)
-
-    frame6=Frame(frame4,width=800,height=630,bg='green',highlightbackground="black",highlightthickness=1)
-    frame6.grid(row=0,column=0)
-
-    treev = ttk.Treeview(frame6, selectmode ='browse')
-    treev.pack(fill='both',expand=True)
-    verscrlbar = ttk.Scrollbar(frame6,
-                                orient ="vertical",
-                                command = treev.yview)
-    verscrlbar.pack(side ='right', fill ='x')
-    treev.configure(xscrollcommand = verscrlbar.set)
-    style = ttk.Style()
-    style.configure("Treeview.Heading", font=(None, 20))
-    horscrlbar = ttk.Scrollbar(frame6,
-                            orient ="horizontal",
-                            command = treev.xview)
-    horscrlbar.pack( fill ='y')
-    treev.configure(yscrollcommand = horscrlbar.set)
-
-
-
-
+    l3=Label(frame21,text="Admin Panel",font=bigfont,bg="#4b2aa1",fg="white").place(x=250,y=10)
 
     
-    button = Button(frame3, text="Users",command=showusers)
+    button = Button(frame23, text="Users",command=usrs)
     img1 = PhotoImage(file=r"static\button_users.gif")
     button.config(image=img1)
     button.place(x=0,y=0)
 
-    button2 = Button(frame3, text="Flights",command=showflights)
+    button2 = Button(frame23, text="Flights",command=flt)
     img2 = PhotoImage(file=r"static\button_flights.gif")
     button2.config(image=img2)
     button2.place(x=168,y=0)
     
-    button3 = Button(frame3, text="Buses",command=showbuses)
+    button3 = Button(frame23, text="Buses",command=bus)
     img3 = PhotoImage(file=r"static\button_buses.gif")
     button3.config(image=img3)
     button3.place(x=349,y=0)
 
-    button4 = Button(frame3, text="Trains",command=showtrains)
+    button4 = Button(frame23, text="Trains",command=train)
     img4 = PhotoImage(file=r"static\button_trains.gif")
     button4.config(image=img4)
     button4.place(x=519,y=0)
 
-    button5 = Button(frame3, text="Hotels",command=showhotels)
+    button5 = Button(frame23, text="Hotels",command=hotel)
     img5 = PhotoImage(file=r"static\button_hotels.gif")
     button5.config(image=img5)
     button5.place(x=697,y=0)
 
-    button6 = Button(frame3, text="Reviews",command=showreviews)
+    button6 = Button(frame23, text="Reviews",command=rev)
     img6 = PhotoImage(file=r"static\button_reviews.gif")
     button6.config(image=img6)
     button6.place(x=875,y=0)
 
-    button7 = Button(frame3, text='Logout',command=logout)
+    button7 = Button(frame23, text='Logout',command=logout)
     img7 = PhotoImage(file=r"static\button_log-out.gif")
     button7.config(image=img7)
     button7.place(x=1074,y=0)
 
     home.mainloop()
-    
-
 
 if __name__ == '__main__':
     Home()
