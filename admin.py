@@ -103,6 +103,10 @@ def Home():
     frame23.place(x=0,y=0)
     frame24=Frame(frame22,width=1272,height=520,highlightbackground="black",highlightthickness=1)
     frame24.place(x=-1,y=80)
+    frame25=Frame(frame24,width=1272,height=100,highlightbackground="black",highlightthickness=1)
+    frame25.place(x=10,y=400)
+    frame26=Frame(frame24,width=450,height=400,bg="#66c2e3",highlightbackground="black",highlightthickness=4)
+    frame26.place(x=800,y=0)
 
     l3=Label(frame21,text="Admin Panel",font=bigfont,bg="#4b2aa1",fg="white").place(x=250,y=10)
 
@@ -141,6 +145,21 @@ def Home():
     img7 = PhotoImage(file=r"static\button_log-out.gif")
     button7.config(image=img7)
     button7.place(x=1074,y=0)
+
+    button8 = Button(frame25, text='ADD')
+    img8 = PhotoImage(file=r"static\ADD.gif")
+    button8.config(image=img8)
+    button8.place(x=10,y=10)
+
+    button9 = Button(frame25, text='UPDATE')
+    img9 = PhotoImage(file=r"static\UPDATE.gif")
+    button9.config(image=img9)
+    button9.place(x=160,y=10)
+
+    button10 = Button(frame25, text='DELETE')
+    img10 = PhotoImage(file=r"static\DELETE.gif")
+    button10.config(image=img10)
+    button10.place(x=350,y=10)
 
     home.mainloop()
 
