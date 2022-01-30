@@ -14,6 +14,11 @@ def pay():
     return i
 
 def airticket():
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Titan@1067",
+    database='titan_travels')
     cu = mydb.cursor()
     cu.execute('SELECT * FROM airtickets;')
     data = cu.fetchall()
@@ -29,6 +34,11 @@ def airticket():
 
 def air(user):
     a=1
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Titan@1067",
+    database='titan_travels')
     cu = mydb.cursor()
     cu.execute('SELECT * FROM AEROPLANES;')
     data = cu.fetchall()
@@ -188,7 +198,7 @@ if __name__ == '__main__':
     mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="titan@1067",
+    password="Titan@1067",
     database='titan_travels')
     air('titan')
     #print(airticket())
