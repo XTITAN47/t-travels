@@ -12,6 +12,11 @@ def pay():
     return i
 
 def busticket():
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Titan@1067",
+    database='titan_travels')
     cu = mydb.cursor()
     cu.execute('SELECT * FROM bustickets;')
     data = cu.fetchall()
@@ -26,6 +31,11 @@ def busticket():
 
 
 def bus(user):
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Titan@1067",
+    database='titan_travels')
     a=1
     cu = mydb.cursor()
     cu.execute('SELECT * FROM Buses;')
