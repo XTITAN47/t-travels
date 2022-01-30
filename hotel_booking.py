@@ -1,143 +1,125 @@
+from calendar import Calendar
 from tkinter import *
 from tkinter import ttk
 import csv
-from PIL import Image, ImageTk
+from tkcalendar import *
 from tkinter.font import Font
-import mysql.connector
-a=1
-def air():
-    mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="titan@1067",
-    database='titan_travels')
-    cu = mydb.cursor()
-    cu.execute('SELECT * FROM AIRTICKETS;')
-    data = cu.fetchall()
-    noOfAvFlights = 0
-    departure=[]
-    destination=[]
-    airticketid=[]
-    price=[]
-    username=[]
-    flightname=[]
-    flightno=[]
+from PIL import Image, ImageTk
+def hotel():
+        def search_rooms():
+                frame24=Frame(main,width=800,height=200,highlightbackground="black",highlightthickness=5)
+                frame24.place(x=250,y=350)
+                city=combo.get()
+                room_type=combo1.get()
+                
+                cat=0
+                if room_type=="FAMILY ROOM(4)":
+                        cat=cat+4
+                if room_type=="SINGLE BED(1)":
+                        cat=cat+5
+                else:
+                        cat=6
+                
+                
 
-    for i in data:
-        noOfAvFlights +=1
-        if i[0] not in airticketid:
-            airticketid.append(i[0])
-        if i[2] not in flightno:
-            flightno.append(i[2])
-        if i[3] not in username:
-            username.append(i[3])
-        if i[4] not in flightname:
-            flightname.append(i[4])
-        if i[5] not in departure:
-            departure.append(i[5])
-        if i[6] not in destination:
-            destination.append(i[6])
-        if i[7] not in price:
-            price.append(i[7])
-        print(i)
-    
-#================================================== SEARCH and DISPLAY ===================================================
-    def search():
-        frame23=Frame(airwin,width=900,height=300,highlightbackground="black",highlightthickness=2)
-        frame23.place(x=200,y=300)
-        l1=Label(frame23,text="USERNAME:-",font=bigfont2).place(x=50,y=30)
-        #=============================USERNAME ENTRY=============================================================
-        use=StringVar()
-        username=Entry(frame23,textvariable=use,bd=2).place(x=280,y=50)
-        #==================================FILGHT NAME (LABEL+ENTRY)=============================================
-        l2=Label(frame23,text="FLIGHT NAME:-",font=bigfont2).place(x=50,y=100)
-        flight_name=StringVar()
-        filght_nm=Entry(frame23,textvariable=flight_name,bd=2).place(x=280,y=110)
-        #====================================AIRTICKET ID ========================================================
-        l3=Label(frame23,text="AIRTICKET ID:-",font=bigfont2).place(x=50,y=160)
-        flight_id=StringVar()
-        filght_id1=Entry(frame23,textvariable=flight_id,bd=2).place(x=280,y=170)
-        #========================================BUTTON===========================================================
-        button2=Button(frame23,text="NEXT",command=next,width=127,bg="black",fg="white",bd=2).place(x=0,y=269)
-
-        # def form():
-        #     search()
-        #     a=use.get()
-        #     b=flight_name.get()
-        #     list=[a,b]
-        #     cu=mydb.cursor()
-        #     sql=("insert into airtickets(username,flightname) values(%s,%s)")
-        #     cu.execute(sql,list)
-        pass
-#===============================================================================================================================
-    def next():
-        
-        frame24=Frame(airwin,width=900,height=300,highlightbackground="black",highlightthickness=2)
-        frame24.place(x=200,y=300)
-        #==============================================================================================
-        l9=Label(frame24,text="===============YOUR FLIGHT BOOKING============",font="arial 18 bold").place(x=100,y=10)
-        l10=Label(frame24,text=text,font="arial 15 bold").place(x=90,y=40)
-        l11=Label(frame24,text="===============================================",font="arial 18 bold").place(x=100,y=190)
-        pass    
-    text="""         
-                     USERNAME:-    {}
-                     DEPARTURE :-  {}
-                     DESTINATION:- {}
-                     FLIGHT NO.:-  {}
-                     FLIGHT NAME:- {}
-                     PRICE:-       {} 
                         
+                        
+                file=open(r"data\csvfiles\hotels.csv","r",newline='')
+                hotels=csv.reader(file)
+                AVAILABLE_HOTELS=[]
+                x=10
+                var=IntVar()
+                
+                        
+                for i in hotels:
+                        if i[0]==city:
+                                AVAILABLE_HOTELS.append(i)
+                                
+                        else:
+                                pass
+                        
+                def text_box():
+                        hotel_booked=var.get()
+                        
+                        for i in AVAILABLE_HOTELS:
+                                if i[7]==str(hotel_booked):
+                                        T=Text(frame24,height="10",width="80")
+                                        data="<<<----YOU HAVE SUCCESSFULLY BOOKED HOTEL ROOM ---->>>"+"\n"+"\nHOTEL NAME : "+i[1]+"\nHOTEL ADDRESS : "+i[2]+"\nCONTACT NUMBER : "+i[3]+"\nYOU HAVE TO PAY RS. "+i[cat]+"\n\n*PLEASE ENSURE BRINGING PHOTO IDENTITY PROOF OF ALL STAYING MEMBERS\n\t\tTHANK YOU"
+                                        T.insert(END,data)
+                                        T.grid(row="10",column="1")
+                                else:
+                                        pass
 
-    
-        """.format(i[3],i[5],i[6],i[2],i[4],i[7])  
-#===============================================================================================================================                                             
-    def home():
-        airwin.destroy()
-        while a==1:
-            import project
-        pass                
-    airwin=Tk()
-    airwin.geometry("1280x720")
-    airwin.resizable(0,0)
-    airwin.title("INDIAN AIRWAYS")
-    img = Image.open(r"static\planes.jpg")
-    photo = ImageTk.PhotoImage(img)
-    Label(airwin,image=photo,borderwidth='0',bg='white',height=720,width=1280).place(x=0,y=0)
-    #=====================================================================================================
-    bigfont= Font(family="segoe script",
+                for j in AVAILABLE_HOTELS:
+                        t=int(j[7])
+                        a=j[1]+"- - & - - STAYING COST FOR - - "+room_type+" - - - >  Rs. "+j[cat]                           
+                        r1=Radiobutton(frame24,text=a,variable=var,value=t,command=text_box).grid(row=str(x),column="1")
+                        x=x+1
+                             
+                
+                    
+        main=Tk()
+        main.geometry("1280x720")
+        main.resizable(0,0)
+        img = Image.open(r"static\hotel.jpg")
+        photo = ImageTk.PhotoImage(img)
+        Label(main,image=photo,borderwidth='0',bg='white',height=720,width=1280).place(x=0,y=0)
+        bigfont= Font(family="segoe script",
                 size=30,
                 weight="bold")
-    bigfont2= Font(family="segoe script",
-                size=20,
+        bigfont2= Font(family="segoe script",
+                size=25,
                 weight="bold")
-    #============================================FRAMES==================================================================
-    frame21=Frame(airwin,width=800,height=100,highlightbackground="black",bg="#4b2aa1",highlightthickness=5)
-    frame21.place(x=250,y=30)
-    frame22=Frame(airwin,width=900,height=100,highlightbackground="black",highlightthickness=2)
-    frame22.place(x=200,y=180)
-    l3=Label(frame21,text="....INDIAN AIRWAYS.....",font=bigfont,bg="#4b2aa1",fg="white")
-    l3.place(x=150,y=10)
-    l1=Label(frame22,text="FROM",font=bigfont2)
-    l1.place(x=20,y=20)
-    l2=Label(frame22,text="TO",font=bigfont2)
-    l2.place(x=600,y=30)
-   
-    combo= ttk.Combobox(frame22,value=departure)
-    combo.current(0)
-    combo.place(x=200,y=45)
-    combo1= ttk.Combobox(frame22,value=destination)
-    combo1.current(0)
-    combo1.place(x=700,y=45)
-    button=Button(airwin,text="SEARCH",command=search,width=126,bg="black",fg="white")
-    button.place(x=202,y=280)
-    button2 = Button(airwin,command=home,bg="#d6d689")
-    img2 = PhotoImage(file=r"static\button_home.gif")
-    button2.config(image=img2)
-    button2.place(x=10,y=10)
-    
-    airwin.mainloop()
+        frame21=Frame(main,width=800,height=100,highlightbackground="black",bg="#adefff",highlightthickness=5)
+        frame21.place(x=250,y=30)
+        l1=Label(frame21,text="...HOTEL BOOKINGS... ",font=bigfont).place(x=10,y=10)
+        frame22=Frame(main,width=1250,height=100,highlightbackground="black",highlightthickness=3)
+        frame22.place(x=10,y=200)
+        l2=Label(frame22,text="CITY",font=bigfont2).place(x=10,y=10)
+        l3=Label(frame22,text="ROOM TYPE",font=bigfont2).place(x=300,y=10)
+        combo= ttk.Combobox(frame22,value=["- -SELECT CITY - -","DELHI","JAIPUR","MUMBAI","AGRA","ETAH"])
+        combo.current(0)
+        combo.place(x=140,y=30)
+        combo1= ttk.Combobox(frame22,value=["SELECT ROOM","FAMILY ROOM(4)","SINGLE BED(1)","DOUBLE BED(2)"])
+        combo1.current(0)
+        combo1.place(x=540,y=30)
+        b1=Button(main,text="SEARCH",command=search_rooms).place(x=500,y=300)
+       
+        def cal(): 
+                       
+                def selectdate():
+                        mydate=mycal.get_date()
+                        print(mydate)  
+                        mycal.destroy()
+                        opencal.destroy()
+                mycal=Calendar(main, setmode= "day",date_pattern="yyyy/mm/dd")
+                mycal.place(x=700,y=300)
+                opencal= Button(frame22,text="Select Date",command=selectdate)
+                opencal.place(x=890,y=30)
+        def cal2():
+                def selectdate2():
+                        mydate=mycal1.get_date()
+                        print(mydate)  
+                        mycal1.destroy()
+                        opencal1.destroy()
+                mycal1=Calendar(main, setmode= "day",date_pattern="d/m/yy")
+                mycal1.place(x=890,y=300)
+                opencal1= Button(frame22,text="Select Date",command=selectdate2)
+                opencal1.place(x=1180,y=30)
+                        
+        l5=Label(frame22,text="CHECK IN",font=bigfont2).place(x=700,y=10)        
+        b2=Button(frame22,text="DATE",command=cal).place(x=890,y=30)
+        l6=Label(frame22,text="CHECK OUT",font=bigfont2).place(x=960,y=10)        
+        b3=Button(frame22,text="DATE",command=cal2).place(x=1180,y=30)
+       
+        
+        
+        
+        
+        
+        main.mainloop()
 
 if __name__ == '__main__':
-    air()
+        hotel()       
         
 
