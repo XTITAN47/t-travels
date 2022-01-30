@@ -1,101 +1,138 @@
 from tkinter import *
 from tkinter import ttk
-import csv
+from tokenize import ContStr
 from PIL import Image, ImageTk
 from tkinter.font import Font
 import mysql.connector
-a=1
-def air():
-    mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="titan@1067",
-    database='titan_travels')
+import random
+from reportlab.pdfgen import canvas
+from invoice import genFlightInvoice
+from tkinter import messagebox
+
+def pay():
+    i = random.randrange(5000,15001,1000)
+    return i
+
+def airticket():
     cu = mydb.cursor()
-    cu.execute('SELECT * FROM AIRTICKETS;')
+    cu.execute('SELECT * FROM airtickets;')
+    data = cu.fetchall()
+    count = 0
+    ticketname = "AR" + str(count)
+    for i in data:
+        if i[0] == ticketname:
+            count += 1
+            ticketname = "AR" + str(count)
+    return ticketname
+
+
+
+def air(user):
+    a=1
+    cu = mydb.cursor()
+    cu.execute('SELECT * FROM AEROPLANES;')
     data = cu.fetchall()
     noOfAvFlights = 0
-    departure=[]
-    destination=[]
-    airticketid=[]
-    price=[]
-    username=[]
-    flightname=[]
-    flightno=[]
-
+    departure=[""]
+    destination=[""]
+    flights=[]
     for i in data:
         noOfAvFlights +=1
-        if i[0] not in airticketid:
-            airticketid.append(i[0])
-        if i[2] not in flightno:
-            flightno.append(i[2])
-        if i[3] not in username:
-            username.append(i[3])
-        if i[4] not in flightname:
-            flightname.append(i[4])
-        if i[5] not in departure:
-            departure.append(i[5])
-        if i[6] not in destination:
-            destination.append(i[6])
-        if i[7] not in price:
-            price.append(i[7])
+        if i[2] not in departure:
+            departure.append(i[2])
+        if i[3] not in destination:
+            destination.append(i[3])
+        data = [i[0],i[1],i[2],i[3]]
+        flights.append(data)
         print(i)
-    
+
 #================================================== SEARCH and DISPLAY ===================================================
     def search():
-        frame23=Frame(airwin,width=900,height=300,highlightbackground="black",highlightthickness=2)
-        frame23.place(x=200,y=300)
-        l1=Label(frame23,text="USERNAME:-",font=bigfont2).place(x=50,y=30)
-        #=============================USERNAME ENTRY=============================================================
-        use=StringVar()
-        username=Entry(frame23,textvariable=use,bd=2).place(x=280,y=50)
-        #==================================FILGHT NAME (LABEL+ENTRY)=============================================
-        l2=Label(frame23,text="FLIGHT NAME:-",font=bigfont2).place(x=50,y=100)
-        flight_name=StringVar()
-        filght_nm=Entry(frame23,textvariable=flight_name,bd=2).place(x=280,y=110)
-        #====================================AIRTICKET ID ========================================================
-        l3=Label(frame23,text="AIRTICKET ID:-",font=bigfont2).place(x=50,y=160)
-        flight_id=StringVar()
-        filght_id1=Entry(frame23,textvariable=flight_id,bd=2).place(x=280,y=170)
-        #========================================BUTTON===========================================================
-        button2=Button(frame23,text="NEXT",command=next,width=127,bg="black",fg="white",bd=2).place(x=0,y=269)
+        def confirm():
+            def makeinvoice():
+                pm = int(p)
+                gst = 0.18 * pm
+                total = gst + pm
+                gst = str(gst)
+                total = str(total)
+                try:
+                    genFlightInvoice(airtktid,user,flightno,fname,flightname,a,b,str(p),gst,total)
+                    messagebox.showinfo("File Downloaded", "Success!")
+                except:
+                    print('Error executing pdf...')
+                    messagebox.showerror("Error", "Unable to load File")
+                frame24.destroy()
 
-        # def form():
-        #     search()
-        #     a=use.get()
-        #     b=flight_name.get()
-        #     list=[a,b]
-        #     cu=mydb.cursor()
-        #     sql=("insert into airtickets(username,flightname) values(%s,%s)")
-        #     cu.execute(sql,list)
-        pass
-#===============================================================================================================================
-    def next():
+            fname = name.get()
+            if fname != "":
+                airtktid=airticket()
+                sql = "INSERT INTO airtickets VALUES (%s, %s,%s,%s,%s, %s,%s,%s)"
+                val = (airtktid,user,flightno,fname,flightname,a,b,p)
+                cu.execute(sql, val)
+                mydb.commit()
+                frame23.destroy()
+                frame24=Frame(airwin,width=900,height=300,bg='green',highlightbackground="black",highlightthickness=2)
+                frame24.place(x=200,y=305)
+                l1=Label(frame24,text=f"You Have Successfully Booked Flight {flightname}",font=bigfont3)
+                l2=Label(frame24,text=f"Happy Journey!",font=bigfont3)
+                button6=Button(frame24,text="Download Invoice",command=makeinvoice,width=50,padx=275)
+                
+
+                l1.grid(row=1,column=1)
+                l2.grid(row=2,column=1)
+                button6.grid(row=3,column=1,sticky=W)
+
+
+
+
+                
+        a= var1.get()
+        b= var2.get()
+        p = pay()
+        if a != b and (a and b)!="":
+            for i in flights:
+                if i[2] == a and  i[3] == b:
+                    flightno = i[0]
+                    flightname = i[1]
+            name = StringVar()
+            frame23=Frame(airwin,width=900,height=300,highlightbackground="black",highlightthickness=2)
+            frame23.place(x=200,y=305)
+            l1=Label(frame23,text="Full Name:",font=bigfont3)
+            l1.grid(row=1,column=0)
+            username=Entry(frame23,width=125,textvariable=name).grid(row=1,column=1)
+
+            l2=Label(frame23,text="UserID: ",font=bigfont3)
+            l2.grid(row=2,column=0)
+            l3=Label(frame23,text="Flight No: ",font=bigfont3)
+            l3.grid(row=3,column=0)
+            l4=Label(frame23,text="Flight Name: ",font=bigfont3)
+            l4.grid(row=4,column=0)
+            l5=Label(frame23,text="Departure: ",font=bigfont3)
+            l5.grid(row=5,column=0)
+            l6=Label(frame23,text="Destination: ",font=bigfont3)
+            l6.grid(row=6,column=0)
+            l7=Label(frame23,text="Sub Total: ",font=bigfont3)
+            l7.grid(row=7,column=0)
+
+            l22=Label(frame23,text=user,font=font4)
+            l22.grid(row=2,column=1,sticky=W)
+            l32=Label(frame23,text=flightno,font=font4)
+            l32.grid(row=3,column=1,sticky=W)
+            l42=Label(frame23,text=flightname,font=font4)
+            l42.grid(row=4,column=1,sticky=W)
+            l52=Label(frame23,text=a,font=font4)
+            l52.grid(row=5,column=1,sticky=W)
+            l62=Label(frame23,text=b,font=font4)
+            l62.grid(row=6,column=1,sticky=W)
+            l72=Label(frame23,text=p,font=font4)
+            l72.grid(row=7,column=1,sticky=W)
+            button4=Button(frame23,text="CONFIRM",command=confirm,width=50,padx=150)
+            button4.grid(row=8,column=1,sticky=W)
+
         
-        frame24=Frame(airwin,width=900,height=300,highlightbackground="black",highlightthickness=2)
-        frame24.place(x=200,y=300)
-        #==============================================================================================
-        l9=Label(frame24,text="===============YOUR FLIGHT BOOKING============",font="arial 18 bold").place(x=100,y=10)
-        l10=Label(frame24,text=text,font="arial 15 bold").place(x=90,y=40)
-        l11=Label(frame24,text="===============================================",font="arial 18 bold").place(x=100,y=190)
-        pass    
-    text="""         
-                     USERNAME:-    {}
-                     DEPARTURE :-  {}
-                     DESTINATION:- {}
-                     FLIGHT NO.:-  {}
-                     FLIGHT NAME:- {}
-                     PRICE:-       {} 
-                        
 
-    
-        """.format(i[3],i[5],i[6],i[2],i[4],i[7])  
 #===============================================================================================================================                                             
-    def home():
-        airwin.destroy()
-        while a==1:
-            import project
-        pass                
+                    
     airwin=Tk()
     airwin.geometry("1280x720")
     airwin.resizable(0,0)
@@ -103,13 +140,23 @@ def air():
     img = Image.open(r"static\planes.jpg")
     photo = ImageTk.PhotoImage(img)
     Label(airwin,image=photo,borderwidth='0',bg='white',height=720,width=1280).place(x=0,y=0)
+
+    def home():
+        airwin.destroy()
+        while a==1:
+            import project
     #=====================================================================================================
     bigfont= Font(family="segoe script",
                 size=30,
                 weight="bold")
     bigfont2= Font(family="segoe script",
-                size=20,
+                size=25,
                 weight="bold")
+    bigfont3= Font(family="arial",
+                size=15,
+                weight="bold")
+    font4= Font(family="arial",
+                size=15,)
     #============================================FRAMES==================================================================
     frame21=Frame(airwin,width=800,height=100,highlightbackground="black",bg="#4b2aa1",highlightthickness=5)
     frame21.place(x=250,y=30)
@@ -121,21 +168,27 @@ def air():
     l1.place(x=20,y=20)
     l2=Label(frame22,text="TO",font=bigfont2)
     l2.place(x=600,y=30)
-   
-    combo= ttk.Combobox(frame22,value=departure)
+    var1 = StringVar()
+    var2 = StringVar()   
+    combo= ttk.Combobox(frame22,value=departure,textvariable=var1,state='readonly')
     combo.current(0)
     combo.place(x=200,y=45)
-    combo1= ttk.Combobox(frame22,value=destination)
+    combo1= ttk.Combobox(frame22,value=destination,textvariable=var2,state='readonly')
     combo1.current(0)
     combo1.place(x=700,y=45)
-    button=Button(airwin,text="SEARCH",command=search,width=126,bg="black",fg="white")
-    button.place(x=202,y=280)
+    button=Button(airwin,text="SEARCH",command=search,width=127)
+    button.place(x=201,y=280)
     button2 = Button(airwin,command=home,bg="#d6d689")
     img2 = PhotoImage(file=r"static\button_home.gif")
     button2.config(image=img2)
     button2.place(x=10,y=10)
-    
     airwin.mainloop()
 
 if __name__ == '__main__':
-    air()
+    mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="titan@1067",
+    database='titan_travels')
+    air('titan')
+    #print(airticket())
