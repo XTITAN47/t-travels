@@ -10,17 +10,16 @@ mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   password="Titan@1067",
-  database = 'titan_travels'
+  database='titan_travels'
 )
-a = mydb.cursor()
 cu = mydb.cursor()
 if checkDatabaseExists() == False:
     DatabaseDoesNotExist()
-    cu.execute('use titan_travels;')
 
 def AOF():        
 #===== get fn=================================================================================================================
         a1=a.get()
+        userid = a1
         b1=b.get()
         c1=c.get()        
         d1=d.get()
@@ -74,13 +73,10 @@ def ADMIN():
     log.mainloop()
 
 #=============================================================================================================================     
-    
-       
 
    
           
 #======================== login =============================================================================================
-
 def LOGIN():
 
     w.destroy() #=========== ye line add karni thi bas =======================================
@@ -113,31 +109,31 @@ def LOGIN():
     le2=Entry(log,textvariable=passwd,bd=2,show="*")
     le2.place(x=190,y=270)
 
-    def loginsuccessful():
+    def loginsuccessful(userid):
                                                                     
                                 
     ####+++++++++++++++++++++++++++++++++++++++++AIR TICKETS BOOKING+++++++++++++++++++++++++++++++++++++++########
 
         def air():
             main.destroy()
-            air_tickets.air()
+            air_tickets.air(userid)
             
             
     ####################################################-------TRAIN TICKET BOOKING------###################################
         
         def train_booking():
             main.destroy()    
-            train_tickets.train()  
+            train_tickets.train(userid)  
             
             
 ##########################---------------------------BUS TICKET BOOKING--------------------------------------------##############################
         def bus():
             main.destroy()
-            bus_ticket.bus()
+            bus_ticket.bus(userid)
 #=================================================HOTEL_BOOKINGS======================================================================        
         def hotel():
             main.destroy()
-            hotel_booking.hotel()    
+            hotel_booking.hotel(userid)    
 
 ###########################-----------------------------main window showing different opions--------------------------------###########################
 
@@ -196,7 +192,7 @@ def LOGIN():
         u=user.get()
         p=passwd.get()
         if authenticateLogin(u,p) in (1,2):
-            loginsuccessful()
+            loginsuccessful(u)
         
 #===============================================================================================================================
 
