@@ -11,6 +11,7 @@ cu = mydb.cursor()
 def Home():
     def logout():
         home.destroy()
+        import project
         pass
     
     udta=["S.No","UserID","Contact","Email","Admin Status"]
@@ -70,16 +71,73 @@ def Home():
 
     def usrs():
         treetbl("users",udta,uwd)
+        frame26=Frame(frame24,width=450,height=400,bg="#66c2e3",highlightbackground="black",highlightthickness=4)
+        frame26.place(x=800,y=0)
+        l0=Label(frame26,text="====DATABASE MANAGER====",font="arial 20 bold",bg="#66c2e3").place(x=0,y=1)
+        l1=Label(frame26,text="USER ID:-",font="arial 15 bold",bg="#66c2e3").place(x=50,y=50)
+        e1=Entry(frame26).place(x=250,y=53)
+        l2=Label(frame26,text="CONTACT:-",font="arial 15 bold",bg="#66c2e3").place(x=50,y=100)
+        e2=Entry(frame26).place(x=250,y=103)
+        l4=Label(frame26,text="EMAIL:-",font="arial 15 bold",bg="#66c2e3").place(x=50,y=150)
+        e4=Entry(frame26).place(x=250,y=153)
+        l3=Label(frame26,text="ADMIN STATUS:-",font="arial 15 bold",bg="#66c2e3").place(x=50,y=200)
+        e3=Entry(frame26).place(x=250,y=203)
     def flt():
         treetbl("aeroplanes",fldta,fwd)
+        frame27=Frame(frame24,width=450,height=400,bg="pink",highlightbackground="black",highlightthickness=4)
+        frame27.place(x=800,y=0)
+        l0=Label(frame27,text="====DATABASE MANAGER====",font="arial 20 bold",bg="pink").place(x=0,y=1)
+        l1=Label(frame27,text="FLIGHT ID:-",font="arial 15 bold",bg="pink").place(x=50,y=50)
+        e1=Entry(frame27).place(x=250,y=53)
+        l2=Label(frame27,text="FLIGHT NAME:-",font="arial 15 bold",bg="pink").place(x=50,y=100)
+        e2=Entry(frame27).place(x=250,y=103)
+        l4=Label(frame27,text="DEPARTURE:-",font="arial 15 bold",bg="pink").place(x=50,y=150)
+        e4=Entry(frame27).place(x=250,y=153)
+        l3=Label(frame27,text="DESTINATION:-",font="arial 15 bold",bg="pink").place(x=50,y=200)
+        e3=Entry(frame27).place(x=250,y=203)
     def bus():
         treetbl("buses",busdta,buswd)
+        frame28=Frame(frame24,width=450,height=400,bg="#6ca2d4",highlightbackground="black",highlightthickness=4)
+        frame28.place(x=800,y=0)
+        l0=Label(frame28,text="====DATABASE MANAGER====",font="arial 20 bold",bg="#6ca2d4").place(x=0,y=1)
+        l1=Label(frame28,text="FLIGHT ID:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=50)
+        e1=Entry(frame28).place(x=250,y=53)
+        l2=Label(frame28,text="FLIGHT NAME:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=100)
+        e2=Entry(frame28).place(x=250,y=103)
+        l4=Label(frame28,text="DEPARTURE:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=150)
+        e4=Entry(frame28).place(x=250,y=153)
+        l3=Label(frame28,text="DESTINATION:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=200)
+        e3=Entry(frame28).place(x=250,y=203)
     def train():
         treetbl("trains",trdta,trwd)
+        frame29=Frame(frame24,width=450,height=400,bg="#d8f26d",highlightbackground="black",highlightthickness=4)
+        frame29.place(x=800,y=0)
+        l0=Label(frame29,text="====DATABASE MANAGER====",font="arial 20 bold",bg="#d8f26d").place(x=0,y=1)
+        l1=Label(frame29,text="FLIGHT ID:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=50)
+        e1=Entry(frame29).place(x=250,y=53)
+        l2=Label(frame29,text="FLIGHT NAME:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=100)
+        e2=Entry(frame29).place(x=250,y=103)
+        l4=Label(frame29,text="DEPARTURE:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=150)
+        e4=Entry(frame29).place(x=250,y=153)
+        l3=Label(frame29,text="DESTINATION:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=200)
+        e3=Entry(frame29).place(x=250,y=203)
     def hotel():
         treetbl("hotels",htldta,htlwd)
+        frame30=Frame(frame24,width=450,height=400,bg="#e69647",highlightbackground="black",highlightthickness=4)
+        frame30.place(x=800,y=0)
+        l0=Label(frame30,text="====DATABASE MANAGER====",font="arial 20 bold",bg="#e69647").place(x=0,y=1)
+        l1=Label(frame30,text="FLIGHT ID:-",font="arial 15 bold",bg="#e69647").place(x=50,y=50)
+        e1=Entry(frame30).place(x=250,y=53)
+        l2=Label(frame30,text="FLIGHT NAME:-",font="arial 15 bold",bg="#e69647").place(x=50,y=100)
+        e2=Entry(frame30).place(x=250,y=103)
+        l4=Label(frame30,text="DEPARTURE:-",font="arial 15 bold",bg="#e69647").place(x=50,y=150)
+        e4=Entry(frame30).place(x=250,y=153)
+        l3=Label(frame30,text="DESTINATION:-",font="arial 15 bold",bg="#e69647").place(x=50,y=200)
+        e3=Entry(frame30).place(x=250,y=203)
     def rev():
         treetbl("reviews",rvdta,rvwd)
+        frame31=Frame(frame24,width=450,height=400,bg="#9647e6",highlightbackground="black",highlightthickness=4)
+        frame31.place(x=800,y=0)
     
     print('admin')
     home=Tk()
@@ -105,8 +163,8 @@ def Home():
     frame24.place(x=-1,y=80)
     frame25=Frame(frame24,width=1272,height=100,highlightbackground="black",highlightthickness=1)
     frame25.place(x=10,y=400)
-    frame26=Frame(frame24,width=450,height=400,bg="#66c2e3",highlightbackground="black",highlightthickness=4)
-    frame26.place(x=800,y=0)
+    #======================================EDITING FRAME=======================================================================
+    
 
     l3=Label(frame21,text="Admin Panel",font=bigfont,bg="#4b2aa1",fg="white").place(x=250,y=10)
 
