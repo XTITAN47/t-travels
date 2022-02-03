@@ -86,10 +86,42 @@ def genTrainInvoice(traintktid,user,trainno,fname,trainname,a,b,p,gst,total):
     c.save()
     print('PDF Generated..')
 
+def genHotelInvoice(htltktid,user,hotelid,fname,hname,roomtype,CheckInDate,CheckOutDate,p,gst,total):
+    c = canvas.Canvas(f'Hotel{htltktid}.pdf',pagesize=(400,400))
+    c.rect(50,58,340,220)
+    c.drawString(160,300,'Titan Travels')
+    c.drawString(100,260,'Ticket Number')
+    c.drawString(250,260,htltktid)
+    c.drawString(100,240,'UserID')
+    c.drawString(250,240,user)
+    c.drawString(100,220,'Hotel Number')
+    c.drawString(250,220,hotelid)
+    c.drawString(100,200,'Full Name')
+    c.drawString(250,200,fname)
+    c.drawString(100,180,'Hotel Name')
+    c.drawString(250,180,hname)
+    c.drawString(100,160,'Room Type')
+    c.drawString(250,160,roomtype)
+    c.drawString(100,140,'Check In')
+    c.drawString(250,140,CheckInDate)
+    c.drawString(100,120,'Check Out')
+    c.drawString(250,120,CheckOutDate)
+    c.drawString(100,100,'Sub Total')
+    c.drawString(250,100,p)
+    c.drawString(100,80,'GST 18%')
+    c.drawString(250,80,gst)
+    c.drawString(100,60,'Total')
+    c.drawString(250,60,total)
+    c.setFont('Helvetica',40)
+    c.setTitle('INVOICE')
+    c.save()
+    print('PDF Generated..')
+
+
 if __name__ == '__main__':
     gst = 0.18 * 8000
     total = gst + 8000
     gst = str(gst)
     total = str(total)
-    genTrainInvoice('AR0','titan','1','VIMARSH THAKUR','Vistara','Mumbai','Delhi','8000',gst,total)
-
+    #genTrainInvoice('AR0','titan','1','VIMARSH THAKUR','Vistara','Mumbai','Delhi','8000',gst,total)
+    genHotelInvoice('HTL1','user','hotelid','fname','Taj Hotel, Mumbai','roomtype','CheckInDate','CheckOutDate','8000',gst,total)
