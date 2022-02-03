@@ -1,10 +1,11 @@
-from distutils import command
 from tkinter import *
 from tkinter.font import Font
 from tkinter import ttk
 from turtle import left
 import tkinter as tk
+from unicodedata import name
 import mysql.connector
+
 mydb = mysql.connector.connect(host="localhost",user="root",password="titan@1067",database="titan_travels")
 cu = mydb.cursor()
 
@@ -22,8 +23,8 @@ def Home():
     buswd=[100,200,200]
     trdta=["TrainId","Trainname","Departure","Destination"]
     trwd=[100,200,200,200]
-    htldta=["hotelid","hotelname","address","rooms_available"]
-    htlwd=[100,200,200,200]
+    htldta=["hotelid","hotelname","city","family_rooms","single_rooms","double_rooms"]
+    htlwd=[100,200,100,100,100,100]
     rvdta=["ReviewId","UserId","Username","Review"]
     rvwd=[100,200,200,200]
     
@@ -45,16 +46,21 @@ def Home():
                 tbl.insert('',count,text='',values=(count,i[0],i[1],i[2],i[4]))
                 count=count+1
 
-        elif x=="aeroplanes" or x=="trains" or x=="hotels" or x=="reviews":
+        elif x=="aeroplanes" or x=="trains" or x=="reviews":
             count=1
             for i in c:
-                tbl.insert('',count,text='',values=(count,i[1],i[2],i[3]))
+                tbl.insert('',count,text='',values=(i[0],i[1],i[2],i[3]))
                 count=count+1
 
         elif x=="buses":
             count=1
             for i in c:
-                tbl.insert('',count,text='',values=(count,i[1],i[2]))
+                tbl.insert('',count,text='',values=(i[0],i[1],i[2]))
+                count=count+1
+        elif x=="hotels":
+            count=1
+            for i in c:
+                tbl.insert('',count,text='',values=(i[0],i[1],i[2],i[3],i[4],i[5]))
                 count=count+1
 
         hsb=Scrollbar(tbfr,orient=HORIZONTAL)
@@ -83,57 +89,104 @@ def Home():
         l3=Label(frame26,text="ADMIN STATUS:-",font="arial 15 bold",bg="#66c2e3").place(x=50,y=200)
         e3=Entry(frame26).place(x=250,y=203)
     def flt():
+        id=StringVar()
+        name=StringVar()
+        departure=StringVar()
+        destination=StringVar()
+        #=========================================================================================================================   
         treetbl("aeroplanes",fldta,fwd)
         frame27=Frame(frame24,width=450,height=400,bg="pink",highlightbackground="black",highlightthickness=4)
         frame27.place(x=800,y=0)
         l0=Label(frame27,text="====DATABASE MANAGER====",font="arial 20 bold",bg="pink").place(x=0,y=1)
         l1=Label(frame27,text="FLIGHT ID:-",font="arial 15 bold",bg="pink").place(x=50,y=50)
-        e1=Entry(frame27).place(x=250,y=53)
+        e1=Entry(frame27,textvariable=id).place(x=250,y=53)
         l2=Label(frame27,text="FLIGHT NAME:-",font="arial 15 bold",bg="pink").place(x=50,y=100)
-        e2=Entry(frame27).place(x=250,y=103)
+        e2=Entry(frame27,textvariable=name).place(x=250,y=103)
         l4=Label(frame27,text="DEPARTURE:-",font="arial 15 bold",bg="pink").place(x=50,y=150)
-        e4=Entry(frame27).place(x=250,y=153)
+        e4=Entry(frame27,textvariable=departure).place(x=250,y=153)
         l3=Label(frame27,text="DESTINATION:-",font="arial 15 bold",bg="pink").place(x=50,y=200)
-        e3=Entry(frame27).place(x=250,y=203)
+        e3=Entry(frame27,textvariable=destination).place(x=250,y=203)
+        #========================================================================================================================
+        a=id.get()
+        b=name.get()
+        c=departure.get()
+        d=destination.get()
+
+
     def bus():
+        id=StringVar()
+        departure=StringVar()
+        destination=StringVar()
+        #=============================================================================================================================
         treetbl("buses",busdta,buswd)
         frame28=Frame(frame24,width=450,height=400,bg="#6ca2d4",highlightbackground="black",highlightthickness=4)
         frame28.place(x=800,y=0)
         l0=Label(frame28,text="====DATABASE MANAGER====",font="arial 20 bold",bg="#6ca2d4").place(x=0,y=1)
-        l1=Label(frame28,text="FLIGHT ID:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=50)
-        e1=Entry(frame28).place(x=250,y=53)
-        l2=Label(frame28,text="FLIGHT NAME:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=100)
-        e2=Entry(frame28).place(x=250,y=103)
-        l4=Label(frame28,text="DEPARTURE:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=150)
-        e4=Entry(frame28).place(x=250,y=153)
-        l3=Label(frame28,text="DESTINATION:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=200)
-        e3=Entry(frame28).place(x=250,y=203)
+        l1=Label(frame28,text="BUS ID:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=50)
+        e1=Entry(frame28,textvariable=id).place(x=250,y=53)
+        l4=Label(frame28,text="DEPARTURE:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=100)
+        e4=Entry(frame28,textvariable=departure).place(x=250,y=103)
+        l3=Label(frame28,text="DESTINATION:-",font="arial 15 bold",bg="#6ca2d4").place(x=50,y=150)
+        e3=Entry(frame28,textvariable=destination).place(x=250,y=153)
+        #===============================================================================================================================
+        a=id.get()
+        c=departure.get()
+        d=destination.get()
     def train():
+        id=StringVar()
+        name=StringVar()
+        departure=StringVar()
+        destination=StringVar()
+        #========================================================================================================================
         treetbl("trains",trdta,trwd)
         frame29=Frame(frame24,width=450,height=400,bg="#d8f26d",highlightbackground="black",highlightthickness=4)
         frame29.place(x=800,y=0)
         l0=Label(frame29,text="====DATABASE MANAGER====",font="arial 20 bold",bg="#d8f26d").place(x=0,y=1)
-        l1=Label(frame29,text="FLIGHT ID:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=50)
+        l1=Label(frame29,text="TRAIN ID:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=50)
         e1=Entry(frame29).place(x=250,y=53)
-        l2=Label(frame29,text="FLIGHT NAME:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=100)
+        l2=Label(frame29,text="TRAIN NAME:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=100)
         e2=Entry(frame29).place(x=250,y=103)
         l4=Label(frame29,text="DEPARTURE:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=150)
         e4=Entry(frame29).place(x=250,y=153)
         l3=Label(frame29,text="DESTINATION:-",font="arial 15 bold",bg="#d8f26d").place(x=50,y=200)
         e3=Entry(frame29).place(x=250,y=203)
+        #========================================================================================================================
+        a=id.get()
+        b=name.get()
+        c=departure.get()
+        d=destination.get()
     def hotel():
+        id=StringVar()
+        name=StringVar()
+        city=StringVar()
+        family=StringVar()
+        single=StringVar()
+        double=StringVar()
+        #===========================================================================================================================
         treetbl("hotels",htldta,htlwd)
         frame30=Frame(frame24,width=450,height=400,bg="#e69647",highlightbackground="black",highlightthickness=4)
         frame30.place(x=800,y=0)
         l0=Label(frame30,text="====DATABASE MANAGER====",font="arial 20 bold",bg="#e69647").place(x=0,y=1)
-        l1=Label(frame30,text="FLIGHT ID:-",font="arial 15 bold",bg="#e69647").place(x=50,y=50)
+        l1=Label(frame30,text="HOTEL ID:-",font="arial 15 bold",bg="#e69647").place(x=50,y=50)
         e1=Entry(frame30).place(x=250,y=53)
-        l2=Label(frame30,text="FLIGHT NAME:-",font="arial 15 bold",bg="#e69647").place(x=50,y=100)
+        l2=Label(frame30,text="HOTEL NAME:-",font="arial 15 bold",bg="#e69647").place(x=50,y=100)
         e2=Entry(frame30).place(x=250,y=103)
-        l4=Label(frame30,text="DEPARTURE:-",font="arial 15 bold",bg="#e69647").place(x=50,y=150)
+        l4=Label(frame30,text="CITY:-",font="arial 15 bold",bg="#e69647").place(x=50,y=150)
         e4=Entry(frame30).place(x=250,y=153)
-        l3=Label(frame30,text="DESTINATION:-",font="arial 15 bold",bg="#e69647").place(x=50,y=200)
+        l3=Label(frame30,text="FAMILY ROOMS:-",font="arial 15 bold",bg="#e69647").place(x=50,y=200)
         e3=Entry(frame30).place(x=250,y=203)
+        l3=Label(frame30,text="SINGLE_BED ROOMS:-",font="arial 15 bold",bg="#e69647").place(x=50,y=250)
+        e3=Entry(frame30).place(x=300,y=253)
+        l3=Label(frame30,text="DOUBLE_BED ROOMS:-",font="arial 15 bold",bg="#e69647").place(x=50,y=300)
+        e3=Entry(frame30).place(x=300,y=303)
+        #===============================================================================================================================
+        a=id.get()
+        b=name.get()
+        c=city.get()
+        d=family.get()
+        e=single.get()
+        f=double.get()
+        
     def rev():
         treetbl("reviews",rvdta,rvwd)
         frame31=Frame(frame24,width=450,height=400,bg="#9647e6",highlightbackground="black",highlightthickness=4)
