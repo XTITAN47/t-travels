@@ -14,6 +14,8 @@ To use this project:
 
 
 #TITAN TRAVEL'S DESCRIPTION:----------
+
+
 This is a python and sql based project. It is a dummy travel agency program which can book tickets for flights, trains, buses.
 It can book hotels also.
 MAIN POINTS OF THIS PROGRAM:-
