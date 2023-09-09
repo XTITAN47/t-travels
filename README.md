@@ -22,8 +22,16 @@ It can book hotels also.
 MAIN POINTS OF THIS PROGRAM:-
 
 
-1)this program can give you orunted recipts.
-2)
+1)this program can give you printed recipts.
+
+2)user friendly UI
+
+FEATURES IN THIS PROJECT
+
+1)this project contains digital clock 
+
+2)this project have ab admin pannel which contain all details of login info 
+
    
    
 
