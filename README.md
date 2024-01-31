@@ -1,4 +1,4 @@
-# t-travels
+# <b>Titan Travels</b>
 
 <b>Requirements:</b><br>
 pillow<br>
