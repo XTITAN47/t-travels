@@ -19,14 +19,14 @@ To use this project:<br>
 This is a python and sql based project. It is a dummy travel agency program which can book tickets for flights, trains, buses.
 It can book hotels also.
 
-MAIN POINTS OF THIS PROGRAM:-
+<big><b>MAIN POINTS OF THIS PROGRAM:-</big></b>
 
 
 1)this program can give you printed recipts.
 
 2)user friendly UI
 
-FEATURES IN THIS PROJECT
+<big><b>FEATURES IN THIS PROJECT</big></b>
 
 1)this project contains digital clock 
 
