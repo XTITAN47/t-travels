@@ -1,6 +1,6 @@
 # <b>Titan Travels</b>
 
-<b>Requirements:</b><br>
+<big><b>Requirements:</b><br></big>
 pillow<br>
 tkinter<br>
 mysql-connector<br>
