@@ -1,13 +1,13 @@
 # t-travels
 
-Requirements:
-pillow
-tkinter
-mysql-connector
-reportlab
-calendar
+<b>Requirements:</b><br>
+pillow<br>
+tkinter<br>
+mysql-connector<br>
+reportlab<br>
+calendar<br>
 
-To use this project:
+To use this project:<br>
    Go to project.py and run it.
    You can add a admin user by running the admin.py
 
