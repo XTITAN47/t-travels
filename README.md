@@ -13,7 +13,7 @@ To use this project:<br>
 
 
 
-#TITAN TRAVEL'S DESCRIPTION:----------
+<big>#TITAN TRAVEL'S DESCRIPTION:----------</big>
 
 
 This is a python and sql based project. It is a dummy travel agency program which can book tickets for flights, trains, buses.
