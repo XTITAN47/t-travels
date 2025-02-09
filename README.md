@@ -42,15 +42,15 @@ Titan Travels is a Python & MySQL-based travel booking system that allows users 
 
 It also generates printed receipts for every booking! 🧾
 
-✨ Key Features
-✅ User-Friendly UI – Built with Tkinter for an easy-to-use interface.
-✅ Admin Panel – View and manage login details of all users.
-✅ Printed Receipts – Generates PDF invoices using ReportLab.
-✅ Basic Travel Site Features – Mimics core functionalities of a real travel booking website.
+✨ Key Features<br>
+✅ User-Friendly UI – Built with Tkinter for an easy-to-use interface.<br>
+✅ Admin Panel – View and manage login details of all users.<br>
+✅ Printed Receipts – Generates PDF invoices using ReportLab.<br>
+✅ Basic Travel Site Features – Mimics core functionalities of a real travel booking website.<br>
 
-[Watch the demo video]([https://drive.google.com/file/d/FILE_ID/view](https://drive.google.com/file/d/185n8WpkPIxhPBQ9LUwdDuVVvCqVYoNGk/view?usp=drive_link))
+[Watch the demo video]([https://drive.google.com/file/d/FILE_ID/view](https://drive.google.com/file/d/185n8WpkPIxhPBQ9LUwdDuVVvCqVYoNGk/view?usp=drive_link))<br>
 
-PROJECT STRUCTURE---
+PROJECT STRUCTURE---<br>
 
 📦 Titan Travels
  ┣ 📜 project.py          # Main application file
