@@ -20,7 +20,7 @@ Ensure you have the following dependencies installed before running the project:
 
 ### 🔧 Install Dependencies  
 Run the following command to install all required packages:  
-```sh
+
 pip install -r requirements.txt
 
 🚀 How to Use This Project
