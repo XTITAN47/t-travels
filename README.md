@@ -30,6 +30,9 @@ It can book hotels also.
 
 1)this project contains digital clock 
 
+[Watch the demo video](https://drive.google.com/file/d/FILE_ID/view)
+
+
 2)this project have ab admin pannel which contain all details of login info 
 
    
