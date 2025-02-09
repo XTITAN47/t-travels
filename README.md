@@ -48,7 +48,7 @@ It also generates printed receipts for every booking! 🧾<br><br>
 ✅ Printed Receipts – Generates PDF invoices using ReportLab.<br>
 ✅ Basic Travel Site Features – Mimics core functionalities of a real travel booking website.<br>
 
-[Watch the demo video]([https://drive.google.com/file/d/FILE_ID/view](https://drive.google.com/file/d/185n8WpkPIxhPBQ9LUwdDuVVvCqVYoNGk/view?usp=drive_link))<br>
+[Watch the demo video]([[https://drive.google.com/file/d/FILE_ID/view](https://drive.google.com/file/d/185n8WpkPIxhPBQ9LUwdDuVVvCqVYoNGk/view?usp=drive_link)](https://drive.google.com/file/d/185n8WpkPIxhPBQ9LUwdDuVVvCqVYoNGk/view?usp=sharing))<br>
 
 PROJECT STRUCTURE---<br>
 
