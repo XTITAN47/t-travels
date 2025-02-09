@@ -10,37 +10,37 @@
 
 ---
 
-## 📌 Requirements  
-Ensure you have the following dependencies installed before running the project:  
-✅ **Pillow** – For image processing  
-✅ **Tkinter** – For GUI interface  
-✅ **MySQL Connector** – For database connection  
-✅ **ReportLab** – For generating receipts  
-✅ **Calendar** – For date selection  
+## 📌 Requirements  <br>
+Ensure you have the following dependencies installed before running the project:  <br>
+✅ **Pillow** – For image processing  <br>
+✅ **Tkinter** – For GUI interface  <br>
+✅ **MySQL Connector** – For database connection  <br>
+✅ **ReportLab** – For generating receipts  <br>
+✅ **Calendar** – For date selection  <br>
 
-### 🔧 Install Dependencies  
-Run the following command to install all required packages:  
+### 🔧 Install Dependencies  <br>
+Run the following command to install all required packages: <br> 
 
-pip install -r requirements.txt
+pip install -r requirements.txt<br>
 
-🚀 How to Use This Project
-1️⃣ Run the Main Application
+🚀 How to Use This Project<br>
+1️⃣ Run the Main Application<br>
 
-python project.py
-📌 Opens the travel booking system.
+python project.py<br>
+📌 Opens the travel booking system.<br>
 
-2️⃣ Set Up Admin User
-python admin.py
-📌 Runs the admin panel to manage user accounts.
+2️⃣ Set Up Admin User<br>
+python admin.py<br>
+📌 Runs the admin panel to manage user accounts.<br>
 
-📝 Project Description
-Titan Travels is a Python & MySQL-based travel booking system that allows users to book:
-✔ Flights ✈️
-✔ Trains 🚆
-✔ Buses 🚌
-✔ Hotels 🏨
+📝 Project Description<br><br>
+Titan Travels is a Python & MySQL-based travel booking system that allows users to book:<br>
+✔ Flights ✈️<br>
+✔ Trains 🚆<br>
+✔ Buses 🚌<br>
+✔ Hotels 🏨<br>
 
-It also generates printed receipts for every booking! 🧾
+It also generates printed receipts for every booking! 🧾<br><br>
 
 ✨ Key Features<br>
 ✅ User-Friendly UI – Built with Tkinter for an easy-to-use interface.<br>
