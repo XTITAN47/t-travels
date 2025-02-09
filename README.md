@@ -52,21 +52,21 @@ It also generates printed receipts for every booking! 🧾
 
 PROJECT STRUCTURE---<br>
 
-📦 Titan Travels
- ┣ 📜 project.py          # Main application file
- ┣ 📜 admin.py            # Admin panel setup
- ┣ 📜 requirements.txt    # Dependencies list
- ┣ 📜 README.md           # Documentation
- ┣ 📂 assets/             # UI images & assets
- ┣ 📂 database/           # SQL scripts & data
+📦 Titan Travels<br>
+ ┣ 📜 project.py          # Main application file<br>
+ ┣ 📜 admin.py            # Admin panel setup<br>
+ ┣ 📜 requirements.txt    # Dependencies list<br>
+ ┣ 📜 README.md           # Documentation<br>
+ ┣ 📂 assets/             # UI images & assets<br>
+ ┣ 📂 database/           # SQL scripts & data<br>
 
-🔧 Future Improvements
-🔹 Add payment gateway integration (Stripe, PayPal)
-🔹 Implement real-time booking confirmations
-🔹 Improve UI/UX design with modern styles
+🔧 Future Improvements<br>
+🔹 Add payment gateway integration (Stripe, PayPal)<br>
+🔹 Implement real-time booking confirmations<br>
+🔹 Improve UI/UX design with modern styles<br>
 
-💡 Contributing
-Contributions are welcome! Feel free to fork this repo, make changes, and submit a pull request.
+💡 Contributing<br>
+Contributions are welcome! Feel free to fork this repo, make changes, and submit a pull request.<br>
 
    
    
